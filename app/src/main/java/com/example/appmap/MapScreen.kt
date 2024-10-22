@@ -1,9 +1,13 @@
 package com.example.appmap
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.google.maps.android.compose.rememberMarkerState
@@ -17,7 +21,9 @@ fun MapScreen() {
     val cameraPositionState = rememberCameraPositionState {
         position = com.google.android.gms.maps.model.CameraPosition.fromLatLngZoom(ArequipaLocation, 12f)
     }
-
+    val context = LocalContext.current
+    val originalBitmap = BitmapFactory.decodeResource(context.resources, R.drawable.cordillera)
+    val scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, 100, 100, false)
 
     Box(modifier = Modifier.fillMaxSize()) {
         // Añadir GoogleMap al layout
@@ -28,8 +34,10 @@ fun MapScreen() {
             // Añadir marcador en Denver, Colorado
             Marker(
                 state = rememberMarkerState(position = ArequipaLocation),
+                icon = BitmapDescriptorFactory.fromBitmap(scaledBitmap),
                 title = "Arequipa, Perú"
             )
+
         }
     }
 }
