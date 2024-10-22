@@ -17,6 +17,7 @@ import com.google.maps.android.compose.rememberMarkerState
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.Polygon
+import com.google.maps.android.compose.Polyline
 
 
 @Composable
@@ -102,6 +103,20 @@ fun MapScreen() {
                 strokeColor = Color.Red,
                 fillColor = Color.Blue,
                 strokeWidth = 5f
+            )
+
+            val polylinePoints = listOf(
+                LatLng(-16.4040102, -71.559611),
+                LatLng(-16.4300, -71.5400),
+                LatLng(-16.4500, -71.5500),
+                LatLng(-16.4600, -71.5600),
+                LatLng(-16.4700, -71.5700)
+            )
+
+            Polyline(
+                points = polylinePoints,
+                color = Color.Blue,
+                width = 8f
             )
 
         }
